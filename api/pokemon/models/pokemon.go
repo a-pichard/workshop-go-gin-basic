@@ -22,6 +22,8 @@ type Pokemon struct {
 	UpdatedAt      time.Time `json:"updated_at" pg:"default:CURRENT_TIMESTAMP"`
 }
 
+type Pokemons []Pokemon
+
 // InsertMe insert new pokemon in database
 func (pokemon *Pokemon) InsertMe(conn *pg.DB) error {
 	_, err := conn.Model(pokemon).Insert()
@@ -31,4 +33,8 @@ func (pokemon *Pokemon) InsertMe(conn *pg.DB) error {
 // GetByPk Get pokemon by it's primary key
 func (pokemon *Pokemon) GetByPk(conn *pg.DB) error {
 	return conn.Model(pokemon).WherePK().Select()
+}
+
+func (pokemons *Pokemons) List(conn *pg.DB) error {
+	return conn.Model(pokemons).Select()
 }

@@ -25,5 +25,6 @@ func Init(engine *gin.Engine, db *pg.DB) {
 	{
 		router.GET(":pokemonId", controllers.Get)
 		router.POST("", controllers.Create)
+		router.GET("", controllers.List)
 	}
 }
