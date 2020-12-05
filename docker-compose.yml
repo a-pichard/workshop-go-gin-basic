@@ -4,6 +4,7 @@ services:
     environment:
       POSTGRES_USER: "toto"
       POSTGRES_PASSWORD: "42"
+      POSTGRES_DB: "gokemon"
     ports:
       - "5432:5432"
     restart: "always"
