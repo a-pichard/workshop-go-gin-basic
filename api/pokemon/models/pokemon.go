@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"time"
 
 	"github.com/go-pg/pg/v10"
@@ -44,5 +45,14 @@ func (pokemons *Pokemons) List(conn *pg.DB) error {
 // UpdateMe update a pokemon
 func (pokemon *Pokemon) UpdateMe(conn *pg.DB) error {
 	_, err := conn.Model(pokemon).WherePK().UpdateNotZero()
+	return err
+}
+
+// DeleteByPk delete a pokemon
+func (pokemon *Pokemon) DeleteByPk(conn *pg.DB) error {
+	result, err := conn.Model(pokemon).WherePK().Delete()
+	if result.RowsAffected() == 0 {
+		return errors.New("Element not found")
+	}
 	return err
 }
