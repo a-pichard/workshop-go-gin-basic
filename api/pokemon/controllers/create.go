@@ -6,12 +6,17 @@ import (
 	"workshop-go-gin-basic/database"
 
 	"github.com/gin-gonic/gin"
+	"gopkg.in/validator.v2"
 )
 
 // Create create pokemon controller
 func Create(c *gin.Context) {
 	pokemonBody := models.Pokemon{}
 	if err := c.ShouldBindJSON(&pokemonBody); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := validator.Validate(pokemonBody); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

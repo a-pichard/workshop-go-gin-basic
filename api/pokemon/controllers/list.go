@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// List list pokemon controller
 func List(c *gin.Context) {
 	var pokemons models.Pokemons
 	conn := database.GetDatabase(c)
