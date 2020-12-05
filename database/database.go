@@ -3,6 +3,7 @@ package database
 import (
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/go-pg/pg/v10"
 )
 
@@ -18,4 +19,18 @@ func ConnectDatabase() *pg.DB {
 		panic(err)
 	}
 	return db
+}
+
+// GetDatabase get database connection from context
+func GetDatabase(c *gin.Context) *pg.DB {
+	db, _ := c.Get("db")
+	return db.(*pg.DB)
+}
+
+// Database set database in gin context
+func Database(conn *pg.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Set("db", conn)
+		c.Next()
+	}
 }

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"workshop-go-gin-basic/api/pokemon"
 	"workshop-go-gin-basic/database"
-	"workshop-go-gin-basic/middleware"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -24,7 +23,7 @@ func main() {
 	defer conn.Close()
 
 	router := gin.Default()
-	router.Use(middleware.Database(conn))
+	router.Use(database.Database(conn))
 
 	pokemon.Init(router, conn)
 
