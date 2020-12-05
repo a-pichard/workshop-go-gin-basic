@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: "postgres"
+    environment:
+      POSTGRES_USER: "toto"
+      POSTGRES_PASSWORD: "42"
+    ports:
+      - "5432:5432"
+    restart: "always"
