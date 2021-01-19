@@ -1,10 +1,22 @@
+version: '3'
 services:
-  postgres:
-    image: "postgres"
+  db:
+    container_name: pg_db
+    image: postgres
     environment:
-      POSTGRES_USER: "toto"
-      POSTGRES_PASSWORD: "42"
-      POSTGRES_DB: "gokemon"
+      POSTGRES_USER: postgres
+      POSTGRES_DB: gokemon
+      POSTGRES_PASSWORD: wesh123
+    restart: always
     ports:
       - "5432:5432"
-    restart: "always"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - server-tier
+volumes:
+  db-data:
+    driver: local
+networks:
+  server-tier:
+  client-tier:
