@@ -14,6 +14,23 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
       - server-tier
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: gokemon_server
+    restart: always
+    environment:
+      DB_USER: "postgres"
+      DB_PASSWORD: "wesh123"
+      DB_HOST: "db:5432"
+      DB_NAME: "gokemon"
+    ports:
+      - "8080:8080"
+    networks:
+      - server-tier
+    depends_on:
+      - db
 volumes:
   db-data:
     driver: local
