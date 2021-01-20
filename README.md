@@ -1,5 +1,5 @@
 # Introduction
-This Go Gin workshop is a mini project that we presented as a workshop for Epitech students. Implements gin and pg-pg libs.
+This Go program is a mini project that we presented as a workshop for Epitech students. Implements gin and pg-pg libs.
 
 # Install and Guess Me
 
